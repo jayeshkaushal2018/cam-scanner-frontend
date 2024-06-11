@@ -1,9 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
-import { Button, Container, Row, Col, Card, ListGroup } from 'react-bootstrap';
+import { Button, Container, Row, Col, Card, ListGroup, Spinner, Alert, Navbar, Nav } from 'react-bootstrap';
+import { FaBarcode, FaCamera, FaSearch } from 'react-icons/fa';
+import '../App.css'; // Import the custom CSS
 
 const BarcodeScanner = () => {
     const [scannedBarcodes, setScannedBarcodes] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState('');
     const videoRef = useRef(null);
     const canvasRef = useRef(null);
 
@@ -17,7 +21,10 @@ const BarcodeScanner = () => {
                 videoRef.current.srcObject = stream;
                 videoRef.current.play();
             })
-            .catch(err => console.error('Error accessing camera: ', err));
+            .catch(err => {
+                console.error('Error accessing camera: ', err);
+                setError('Error accessing camera. Please try again.');
+            });
     };
 
     const captureImage = () => {
@@ -30,12 +37,17 @@ const BarcodeScanner = () => {
     };
 
     const scanBarcodes = async () => {
+        setError('');
+        setIsLoading(true);
         const image = captureImage();
         try {
-            const response = await axios.post('http://localhost:5000/scan-barcodes', { image });
-            setScannedBarcodes(response.data.barcodes.map(barcode => barcode.displayValue));
+            const response = await axios.post('http://localhost:5000/api/barcodes', { image });
+            setScannedBarcodes(response.data.barcodes.map(barcode => barcode.description));
         } catch (error) {
             console.error('Error scanning barcodes: ', error);
+            setError('Error scanning barcodes. Please try again.');
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -43,23 +55,26 @@ const BarcodeScanner = () => {
         <Container className="mt-4">
             <Row className="justify-content-md-center">
                 <Col md="8">
-                    <Card>
+                    <Card className="text-center">
                         <Card.Body>
-                            <Card.Title>Barcode Scanner</Card.Title>
+                            <Card.Title className="gold-title">Barcode Scanner</Card.Title>
+                            {error && <Alert variant="danger">{error}</Alert>}
                             <video ref={videoRef} style={{ width: '100%' }} />
                             <canvas ref={canvasRef} style={{ display: 'none' }} width="640" height="480"></canvas>
-                            <Button variant="primary" className="mt-3" onClick={scanBarcodes}>
-                                Scan Barcodes
-                            </Button>
+                            <div className="text-center mt-3">
+                                <Button variant="primary" onClick={scanBarcodes} disabled={isLoading}>
+                                    {isLoading ? <Spinner animation="border" size="sm" /> : 'Scan Barcodes'}
+                                </Button>
+                            </div>
                         </Card.Body>
                     </Card>
                 </Col>
             </Row>
             <Row className="mt-4 justify-content-md-center">
                 <Col md="8">
-                    <Card>
+                    <Card className="text-center">
                         <Card.Body>
-                            <Card.Title>Scanned Barcodes</Card.Title>
+                            <Card.Title className="gold-title">Scanned Barcodes</Card.Title>
                             <ListGroup variant="flush">
                                 {scannedBarcodes.length > 0 ? (
                                     scannedBarcodes.map((barcode, index) => (

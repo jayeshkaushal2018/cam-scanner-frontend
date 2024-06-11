@@ -1,13 +1,80 @@
-.App {
+/* App.css */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Set font family */
+  background-color: #f8f9fa; /* Light background for the whole page */
+}
+
+.navbar {
+  background-color: #FFD700; /* Golden yellow background for the navbar */
+  border-bottom: 2px solid #333333; /* Dark gray border at the bottom */
+}
+
+.navbar-brand {
+  color: #ffffff; /* Dark gray color for the navbar brand text */
+  font-weight: bold; /* Bold font weight for the navbar brand */
+}
+
+.navbar-nav .nav-link {
+  color: #333333; /* Dark gray color for the navbar links */
+}
+
+.navbar-nav .nav-link:hover {
+  color: #1c1c3c; /* Darker gray color for hover effect on navbar links */
+}
+
+.container {
+  margin-top: 50px;
+}
+
+.card {
+  margin-bottom: 20px;
+  background-color: #ffffff; /* White background for cards */
+}
+
+.gold-title {
+  color: #FFD700; /* Golden yellow color */
   text-align: center;
+  margin-bottom: 1.5rem;
 }
 
-.App-header {
-  background-color: #282c34;
-  padding: 20px;
-  color: white;
+.gold-text {
+  color: #FFD700; /* Golden yellow color */
 }
 
-main {
-  padding: 20px;
+.gold-icon {
+  color: #FFD700; /* Golden yellow color */
+  margin-right: 10px;
+}
+
+button.btn-primary {
+  background-color: #FFD700; /* Golden yellow background */
+  border-color: #FFD700; /* Golden yellow border */
+  color: #ffffff; /* White text */
+  font-weight: bold; /* Bold font weight */
+  text-transform: uppercase; /* Uppercase text */
+}
+
+button.btn-primary:hover {
+  background-color: #FFC700; /* Slightly darker golden yellow for hover */
+  border-color: #FFC700; /* Slightly darker golden yellow for hover */
+}
+
+.list-group-item {
+  text-align: center;
+  color: #333333; /* Dark gray color for scanned barcodes */
+  background-color: #ffffff; /* White background for list items */
+  font-size: 16px; /* Adjust font size */
+  padding: 10px 20px; /* Add padding */
+}
+
+.list-group-item:first-child {
+  border-top: none; /* Remove border for the first item */
+}
+
+.list-group-item:last-child {
+  border-bottom: none; /* Remove border for the last item */
+}
+
+.alert-danger {
+  text-align: center;
 }
