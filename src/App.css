@@ -1,17 +1,18 @@
 /* App.css */
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Set font family */
-  background-color: #f8f9fa; /* Light background for the whole page */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
 }
 
-.navbar {
+.golden-navbar {
   background-color: #FFD700; /* Golden yellow background for the navbar */
   border-bottom: 2px solid #333333; /* Dark gray border at the bottom */
 }
 
 .navbar-brand {
-  color: #ffffff; /* Dark gray color for the navbar brand text */
-  font-weight: bold; /* Bold font weight for the navbar brand */
+  color: #333333; /* Dark gray color for the navbar brand text */
+  font-weight: bold;
+  font-size: 24px;
 }
 
 .navbar-nav .nav-link {
@@ -75,6 +76,14 @@ button.btn-primary:hover {
   border-bottom: none; /* Remove border for the last item */
 }
 
-.alert-danger {
+.alert-danger,
+.alert-warning {
   text-align: center;
+}
+
+.camera-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
