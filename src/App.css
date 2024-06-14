@@ -60,6 +60,19 @@ button.btn-primary:hover {
   border-color: #FFC700; /* Slightly darker golden yellow for hover */
 }
 
+button.btn-secondary {
+  background-color: #6c757d; /* Secondary button color */
+  border-color: #6c757d; /* Secondary button border */
+  color: #ffffff; /* White text */
+  font-weight: bold; /* Bold font weight */
+  text-transform: uppercase; /* Uppercase text */
+}
+
+button.btn-secondary:hover {
+  background-color: #5a6268; /* Slightly darker secondary button for hover */
+  border-color: #545b62; /* Slightly darker secondary button border for hover */
+}
+
 .list-group-item {
   text-align: center;
   color: #333333; /* Dark gray color for scanned barcodes */
@@ -86,4 +99,9 @@ button.btn-primary:hover {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: center;
 }

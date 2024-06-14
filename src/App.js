@@ -8,7 +8,7 @@ function App() {
         <div className="App">
             <Navbar bg="dark" variant="dark">
                 <Container>
-                    <Navbar.Brand href="#home">Barcode Scanner App</Navbar.Brand>
+                    <Navbar.Brand href="#home" >Barcode Scanner App</Navbar.Brand>
                 </Container>
             </Navbar>
             <main className="my-4">

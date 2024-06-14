@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
-import { Button, Container, Row, Col, Card, ListGroup, Spinner, Alert } from 'react-bootstrap';
-import { FaBarcode, FaCamera, FaSearch } from 'react-icons/fa';
+import { Button, Container, Row, Col, Card, ListGroup, Spinner, Alert, ButtonGroup } from 'react-bootstrap';
+import { FaBarcode, FaCamera, FaSearch, FaRedo, FaPrint } from 'react-icons/fa';
 import '../App.css'; // Import the custom CSS
 import log from './logger'; // Import the logger
 
@@ -68,6 +68,17 @@ const BarcodeScanner = () => {
         }
     };
 
+    const resetScanner = () => {
+        setScannedBarcodes([]);
+        setError('');
+        setValidationError('');
+        log.info('Scanner reset.');
+    };
+
+    const printBarcodes = () => {
+        window.print();
+    };
+
     return (
         <Container className="mt-4">
             <Row className="justify-content-md-center">
@@ -83,9 +94,14 @@ const BarcodeScanner = () => {
                                 <canvas ref={canvasRef} style={{ display: 'none' }} width="640" height="480"></canvas>
                             </div>
                             <div className="text-center mt-3">
-                                <Button variant="primary" onClick={scanBarcodes} disabled={isLoading}>
-                                    {isLoading ? <Spinner animation="border" size="sm" /> : <><FaSearch /> Scan Barcodes</>}
-                                </Button>
+                                <ButtonGroup>
+                                    <Button variant="primary" onClick={scanBarcodes} disabled={isLoading}>
+                                        {isLoading ? <Spinner animation="border" size="sm" /> : <><FaSearch /> Scan</>}
+                                    </Button>
+                                    <Button variant="secondary" onClick={resetScanner}>
+                                        <FaRedo /> Reset
+                                    </Button>
+                                </ButtonGroup>
                             </div>
                         </Card.Body>
                     </Card>
@@ -105,6 +121,13 @@ const BarcodeScanner = () => {
                                     <ListGroup.Item><FaBarcode className="gold-icon" /> No barcodes scanned yet.</ListGroup.Item>
                                 )}
                             </ListGroup>
+                            {scannedBarcodes.length > 0 && (
+                                <div className="text-center mt-3">
+                                    <Button variant="primary" onClick={printBarcodes}>
+                                        <FaPrint /> Print Barcodes
+                                    </Button>
+                                </div>
+                            )}
                         </Card.Body>
                     </Card>
                 </Col>
